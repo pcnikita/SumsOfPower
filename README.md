@@ -1,3 +1,7 @@
+*******************************************************************************************************************************************
+Note:
+Go to https://latexbase.com/d/0ab7ec7d-eddb-4b35-8e26-a64d09654a92 and paste everything outside of the stars in the text box. It will yield a nice LaTeX rendering which is easier to read.
+*******************************************************************************************************************************************
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -38,8 +42,3 @@ To find the first n partial sums, we need to plug in n from 1 to 11 in the f(n) 
 We have a system of 11 equations and 11 unknowns( $a_{1}$ to $a_{11}$). After solving the system, $a_{1}$ to $a_{11}$ are the coefficients of the 11th degree polynomial. Through further algebraic manipulation, one can find an expression of the form $$\frac{n(n-b_{1})...(n-b_{10})}{r}$$ where $b_1$ to $b_{10}$ are the 10 negative roots of the polynomial and r is a number.
 
 \end{document}
-
-*******************************************************************************************************************************************
-Note:
-Go to https://latexbase.com/d/0ab7ec7d-eddb-4b35-8e26-a64d09654a92 and paste everything outside of the stars in the text box. It will yield a nice LaTeX rendering which is easier to read.
-*******************************************************************************************************************************************
