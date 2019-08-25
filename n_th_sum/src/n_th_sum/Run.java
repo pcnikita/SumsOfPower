@@ -25,8 +25,8 @@ public class Run {
 		System.out.println("For which power would you like to calculate the formula? (type whole, positive number)");
 		int power = in.nextInt()+1;
 		
-		float[][] init = matrix.createNullMatrix(power);
-		float[] vec = matrix.findPartialSums(init);
+		double[][] init = matrix.createNullMatrix(power);
+		double[] vec = matrix.findPartialSums(init);
 		matrix.readMatrix(init);
 		System.out.println();
 		init = matrix.createIdentityMatrix(power);
@@ -38,6 +38,15 @@ public class Run {
 		System.out.println();
 		matrix.readVector(vec);
 		
+		double[][] inverse = matrix.findInverse(init);
+		
+		vec = matrix.multiplyMatrices(inverse, vec);
+		System.out.println();
+		System.out.println();
+		matrix.readMatrix(vec);
+		
+		in.close();
 	}
+	
 
 }
