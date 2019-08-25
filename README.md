@@ -2,6 +2,8 @@
 Note:
 Go to https://latexbase.com/d/0ab7ec7d-eddb-4b35-8e26-a64d09654a92 and paste everything outside of the stars in the text box. It will yield a nice LaTeX rendering which is easier to read.
 
+Note2: This hasn't been proved using mathematical formalisms. Just because it might work for the first 2, 3 or 100 doesn't mean it will work for 1000, for example. The entire idea needs a demonstration in order for it to be valid. Under no circumstance am i saying that what stays written.
+
 Improvements :
 - [ ] Create a method that checks the error.
 - [ ] Check how far each of the first n partial sums deviate from the actual value
