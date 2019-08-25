@@ -3,6 +3,7 @@ Note:
 Go to https://latexbase.com/d/0ab7ec7d-eddb-4b35-8e26-a64d09654a92 and paste everything outside of the stars in the text box. It will yield a nice LaTeX rendering which is easier to read.
 *******************************************************************************************************************************************
 \documentclass[12pt]{article}
+
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{hyperref}
