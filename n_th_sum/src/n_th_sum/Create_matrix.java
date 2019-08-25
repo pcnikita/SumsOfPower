@@ -1,5 +1,4 @@
 package n_th_sum;
-import java.lang.Math;
 import java.math.BigDecimal;
 
 public class Create_matrix {
