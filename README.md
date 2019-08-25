@@ -1,6 +1,15 @@
 *******************************************************************************************************************************************
 Note:
 Go to https://latexbase.com/d/0ab7ec7d-eddb-4b35-8e26-a64d09654a92 and paste everything outside of the stars in the text box. It will yield a nice LaTeX rendering which is easier to read.
+
+Improvements :
+-[] Create a method that checks the error.
+-[] Check how far each of the first n partial sums deviate from the actual value
+-[] Check how far each of the (10+n)th, (100+n)th and (1000+n)th deviate from the actual value.
+-[] Display function as a polynomial.
+-[] Perform algebraic manipulations automatically to display canonical form of polynomial.
+-[] Improve accuracy? (i don't know how good the accuracy is at the moment).
+
 *******************************************************************************************************************************************
 \documentclass[12pt]{article}
 
