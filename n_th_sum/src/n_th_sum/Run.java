@@ -26,7 +26,6 @@ public class Run {
 		int power = in.nextInt()+1;
 		
 		double[][] init = matrix.createNullMatrix(power);
-		double[] vec = matrix.findPartialSums(init);
 		matrix.readMatrix(init);
 		System.out.println();
 		init = matrix.createIdentityMatrix(power);
@@ -36,14 +35,23 @@ public class Run {
 		matrix.readMatrix(init);
 		System.out.println();
 		System.out.println();
+		double[] vec = matrix.findPartialSums(init);
 		matrix.readVector(vec);
 		
 		double[][] inverse = matrix.findInverse(init);
+		matrix.readMatrix(inverse);
+		System.out.println();
 		
-		vec = matrix.multiplyMatrices(inverse, vec);
+		double[][] result = matrix.multiplyMatrices(init, inverse);
+		matrix.readMatrix(result);
+		
+		double[][] result1 = matrix.multiplyMatrices(inverse, init);
+		matrix.readMatrix(result1);
+		
+		double[] vec1 = matrix.multiplyMatrices(inverse, vec);
 		System.out.println();
 		System.out.println();
-		matrix.readMatrix(vec);
+		matrix.readVector(vec1);
 		
 		in.close();
 	}

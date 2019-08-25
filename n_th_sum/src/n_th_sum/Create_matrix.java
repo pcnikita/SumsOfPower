@@ -7,7 +7,7 @@ public class Create_matrix {
 		double[][] matrix = new double[n][n];
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
-				matrix[i][j] = 0.0f;
+				matrix[i][j] = 0.0d;
 			}
 		}
 		return matrix;
@@ -47,9 +47,9 @@ public class Create_matrix {
 
 	public double[] findPartialSums (double[][] matrix) {
 		double[] vector = new double[matrix.length];
-		double partialSum = 0.0f;
+		double partialSum = 0.0d;
 		for (int i=0; i< matrix.length; i++) {
-			partialSum = partialSum + (double) Math.pow(i+1, matrix.length);
+			partialSum = partialSum + (double) Math.pow(i+1, matrix.length-1);
 			vector[i] = partialSum ;
 		}
 		return vector;
@@ -97,7 +97,7 @@ public class Create_matrix {
 		double[][] c = new double[a.length][b[0].length];
 		for(int i = 0; i < a.length; i++) {
 			for (int j = 0; j < b[0].length; j++ ) {
-				double term = 0.0f;
+				double term = 0.0d;
 				for (int k = 0; k < a[0].length; k++) {
 					term = term + a[i][k] * b[k][j];
 				}
@@ -114,15 +114,14 @@ public class Create_matrix {
 			throw new ArithmeticException ("The number of columns of the first matrix must be equal to the number of rows of the second");
 		}
 		double[] c = new double[a.length];
+		
 		for(int i = 0; i < a.length; i++) {
-			for (int j = 0; j < 1; j++ ) {
-				double term = 0.0f;
-				for (int k = 0; k < a[0].length; k++) {
-					term = term + a[i][k] * b[j];
-				}
-				
-				c[i] = term;
+			double term = 0.0d;
+			for (int k = 0; k < a[0].length; k++) {
+				term = term + a[i][k] * b[k];
 			}
+			System.out.println(term);
+			c[i] = term;
 		}
 		
 		return c;
