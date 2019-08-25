@@ -3,6 +3,8 @@
  */
 package n_th_sum;
 import n_th_sum.Create_matrix;
+import java.util.Scanner;
+
 
 /**
  * @author Nikita
@@ -18,8 +20,24 @@ public class Run {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		float[][] init = matrix.createNullMatrix(10000);
+		
+		Scanner in = new Scanner(System.in);
+		System.out.println("For which power would you like to calculate the formula? (type whole, positive number)");
+		int power = in.nextInt()+1;
+		
+		float[][] init = matrix.createNullMatrix(power);
+		float[] vec = matrix.findPartialSums(init);
 		matrix.readMatrix(init);
+		System.out.println();
+		init = matrix.createIdentityMatrix(power);
+		matrix.readMatrix(init);
+		System.out.println();
+		init = matrix.findCoefficients(init);
+		matrix.readMatrix(init);
+		System.out.println();
+		System.out.println();
+		matrix.readVector(vec);
+		
 	}
 
 }
