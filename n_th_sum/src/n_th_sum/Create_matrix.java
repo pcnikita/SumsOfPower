@@ -1,27 +1,28 @@
 package n_th_sum;
 import java.lang.Math;
+import java.math.BigDecimal;
 
 public class Create_matrix {
 	
-	public double[][] createNullMatrix(int n) {
-		double[][] matrix = new double[n][n];
+	public BigDecimal[][] createNullMatrix(int n) {
+		BigDecimal[][] matrix = new BigDecimal[n][n];
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
-				matrix[i][j] = 0.0d;
+				matrix[i][j] = BigDecimal.ZERO;
 			}
 		}
 		return matrix;
 	}
 	
-	public double[][] createIdentityMatrix(int n) {
-		double[][] matrix = createNullMatrix(n);
+	public BigDecimal[][] createIdentityMatrix(int n) {
+		BigDecimal[][] matrix = createNullMatrix(n);
 		for (int i=0;i<n;i++) {
-			matrix[i][i] = 1.0f;
+			matrix[i][i] = BigDecimal.ONE;
 		}
 		return matrix;
 	}
 	
-	public void readMatrix (double[][] matrix) {
+	public void readMatrix (BigDecimal[][] matrix) {
 		for(int i=0; i< matrix.length; i++) {
 			System.out.println();
 			for (int j=0; j< matrix[0].length; j++) {
@@ -30,55 +31,58 @@ public class Create_matrix {
 		}
 	}
 	
-	public void readMatrix (double[] matrix) {
+	public void readMatrix (BigDecimal[] matrix) {
 		for(int i=0; i< matrix.length; i++) {
 			System.out.print(matrix[i] +" ");
 		}
 	}
 	
-	public double[][] findCoefficients (double[][] matrix){
+	public BigDecimal[][] findCoefficients (BigDecimal[][] matrix){
 		for (int i=0; i< matrix.length; i++) {
 			for (int j=0; j< matrix[0].length; j++) {
-				matrix[i][j] = (double) Math.pow(i+1, matrix.length - j);
+				BigDecimal a = new BigDecimal(i+1);
+				matrix[i][j] = a.pow(matrix.length - j);
 			}
 		}
 		return matrix;
 	}
 
-	public double[] findPartialSums (double[][] matrix) {
-		double[] vector = new double[matrix.length];
-		double partialSum = 0.0d;
+	public BigDecimal[] findPartialSums (BigDecimal[][] matrix) {
+		BigDecimal[] vector = new BigDecimal[matrix.length];
+		BigDecimal partialSum = BigDecimal.ZERO;
 		for (int i=0; i< matrix.length; i++) {
-			partialSum = partialSum + (double) Math.pow(i+1, matrix.length-1);
+			BigDecimal a = new BigDecimal (i+1);
+			partialSum = partialSum.add(a.pow(matrix.length-1));
 			vector[i] = partialSum ;
 		}
 		return vector;
 	}
 	
-	public void readVector (double[] vector){
+	public void readVector (BigDecimal[] vector){
+		System.out.println("================================================================Vector reading starts here================================================================");
 		for (int i=0; i< vector.length; i++) {
-			System.out.print(vector[i] + " ");
+			System.out.println(vector[i] + " ");
 		}
 	}
 
-	public double[][] findInverse(double[][] matrix){
-		double[][] inverse = createIdentityMatrix(matrix.length);
-		double[][] copy = copyMatrix(matrix);
+	public BigDecimal[][] findInverse(BigDecimal[][] matrix){
+		BigDecimal[][] inverse = createIdentityMatrix(matrix.length);
+		BigDecimal[][] copy = copyMatrix(matrix);
 		
 		for (int i = 0; i < copy.length; i++) {
-			if (copy[i][i] != 1) {
-				double ratio = copy[i][i];
+			if (copy[i][i] != BigDecimal.ONE) {
+				BigDecimal ratio = copy[i][i];
 				for (int k = 0; k< copy.length; k++) {
-					copy [i][k] = copy[i][k]/ratio;
-					inverse [i][k] =  inverse[i][k]/ ratio ; 
+					copy [i][k] = copy[i][k].divide(ratio,1000,BigDecimal.ROUND_HALF_EVEN);
+					inverse [i][k] =  inverse[i][k].divide(ratio,1000,BigDecimal.ROUND_HALF_EVEN); 
 				}
 			}
 			for (int j = 0; j < copy.length; j++) {
 				if (i!= j) {
-					double ratio = findRatio (copy[i][i], copy[j][i]);
+					BigDecimal ratio = findRatio (copy[i][i], copy[j][i]);
 					for (int k = 0; k< copy.length; k++) {
-						copy [j][k] = copy[j][k] + ratio*copy[i][k];
-						inverse [j][k] = inverse[j][k] + ratio*inverse[i][k]; 
+						copy [j][k] = copy[j][k].add( ratio.multiply(copy[i][k]));
+						inverse [j][k] = inverse[j][k].add(ratio.multiply(inverse[i][k])); 
 					}
 				}
 			} 
@@ -86,20 +90,20 @@ public class Create_matrix {
 		return inverse;
 	}
 	
-	public double findRatio (double a, double b) {
-		return (- b/a);
+	public BigDecimal findRatio (BigDecimal a, BigDecimal b) {
+		return ( b.divide(a,1000,BigDecimal.ROUND_HALF_EVEN) ).negate();
 	}
 
-	public double[][] multiplyMatrices(double[][] a, double[][] b){
+	public BigDecimal[][] multiplyMatrices(BigDecimal[][] a, BigDecimal[][] b){
 		if (a[0].length != b.length) {
 			throw new ArithmeticException ("The number of columns of the first matrix must be equal to the number of rows of the second");
 		}
-		double[][] c = new double[a.length][b[0].length];
+		BigDecimal[][] c = new BigDecimal[a.length][b[0].length];
 		for(int i = 0; i < a.length; i++) {
 			for (int j = 0; j < b[0].length; j++ ) {
-				double term = 0.0d;
+				BigDecimal term = BigDecimal.ZERO;
 				for (int k = 0; k < a[0].length; k++) {
-					term = term + a[i][k] * b[k][j];
+					term = term.add( a[i][k].multiply( b[k][j]));
 				}
 				
 				c[i][j] = term;
@@ -109,16 +113,16 @@ public class Create_matrix {
 		return c;
 	}
 	
-	public double[] multiplyMatrices(double[][] a, double[] b){
+	public BigDecimal[] multiplyMatrices(BigDecimal[][] a, BigDecimal[] b){
 		if (a[0].length != b.length) {
 			throw new ArithmeticException ("The number of columns of the first matrix must be equal to the number of rows of the second");
 		}
-		double[] c = new double[a.length];
+		BigDecimal[] c = new BigDecimal[a.length];
 		
 		for(int i = 0; i < a.length; i++) {
-			double term = 0.0d;
+			BigDecimal term = BigDecimal.ZERO;
 			for (int k = 0; k < a[0].length; k++) {
-				term = term + a[i][k] * b[k];
+				term = term.add( a[i][k].multiply( b[k]));
 			}
 			System.out.println(term);
 			c[i] = term;
@@ -127,8 +131,8 @@ public class Create_matrix {
 		return c;
 	}
 	
-	public double[][] copyMatrix (double[][] matrix){
-		double[][] copy = new double[matrix.length][matrix[0].length];
+	public BigDecimal[][] copyMatrix (BigDecimal[][] matrix){
+		BigDecimal[][] copy = new BigDecimal[matrix.length][matrix[0].length];
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length; j++) {
 				copy[i][j] = matrix [i][j];

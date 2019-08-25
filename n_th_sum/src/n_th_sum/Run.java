@@ -4,6 +4,7 @@
 package n_th_sum;
 import n_th_sum.Create_matrix;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
 
 /**
@@ -25,35 +26,25 @@ public class Run {
 		System.out.println("For which power would you like to calculate the formula? (type whole, positive number)");
 		int power = in.nextInt()+1;
 		
-		double[][] init = matrix.createNullMatrix(power);
-		matrix.readMatrix(init);
-		System.out.println();
-		init = matrix.createIdentityMatrix(power);
-		matrix.readMatrix(init);
-		System.out.println();
+		long startTime = System.nanoTime();
+		
+		BigDecimal[][] init = matrix.createNullMatrix(power);
+		
 		init = matrix.findCoefficients(init);
-		matrix.readMatrix(init);
-		System.out.println();
-		System.out.println();
-		double[] vec = matrix.findPartialSums(init);
-		matrix.readVector(vec);
 		
-		double[][] inverse = matrix.findInverse(init);
-		matrix.readMatrix(inverse);
-		System.out.println();
+		BigDecimal[] vec = matrix.findPartialSums(init);
 		
-		double[][] result = matrix.multiplyMatrices(init, inverse);
-		matrix.readMatrix(result);
+		BigDecimal[][] inverse = matrix.findInverse(init);
 		
-		double[][] result1 = matrix.multiplyMatrices(inverse, init);
-		matrix.readMatrix(result1);
-		
-		double[] vec1 = matrix.multiplyMatrices(inverse, vec);
-		System.out.println();
+		BigDecimal[] vec1 = matrix.multiplyMatrices(inverse, vec);
 		System.out.println();
 		matrix.readVector(vec1);
 		
+		long endTime = System.nanoTime();
+		
 		in.close();
+		
+		System.out.println( (float)((float)(endTime-startTime)/1000000000) + " seconds to finish");
 	}
 	
 
